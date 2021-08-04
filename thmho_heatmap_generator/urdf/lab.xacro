@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="lab_model">
 
-  <xacro:include filename="$(find factory_sim)/urdf/laser.plugins.xacro" />
+  <xacro:include filename="$(find thmho_heatmap_generator)/urdf/laser.plugins.xacro" />
 
   <xacro:property name="laser_size_x" value="0.03"/>
   <xacro:property name="laser_size_y" value="0.03"/>
@@ -87,7 +87,7 @@
   <link name="sensor_laser">
     <visual>
       <geometry>
-        <mesh filename="package://factory_sim/meshes/hokuyo.dae"/>
+        <mesh filename="package://thmho_heatmap_generator/meshes/hokuyo.dae"/>
         <!--box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/-->
       </geometry>
       <material name="blue"/>
@@ -104,7 +104,7 @@
   <link name="sensor_laser_2">
     <visual>
       <geometry>
-        <mesh filename="package://factory_sim/meshes/hokuyo.dae"/>
+        <mesh filename="package://thmho_heatmap_generator/meshes/hokuyo.dae"/>
         <!--box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/-->
       </geometry>
       <material name="blue"/>

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(factory_sim)
+project(thmho_heatmap_generator)
 
 find_package(catkin REQUIRED
     COMPONENTS
@@ -10,12 +10,10 @@ find_package(catkin REQUIRED
 )
 
 catkin_package(
-    INCLUDE_DIRS include
     CATKIN_DEPENDS nav_msgs costmap_2d roscpp tf
 )
 
-include_directories(
-  include
+include_directories( 
   ${catkin_INCLUDE_DIRS}
 )
 

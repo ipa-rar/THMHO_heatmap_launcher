@@ -9,10 +9,10 @@
         <arg name="y_pos" default="0.0"/>
         <arg name="z_pos" default="0.0"/>
 
-        <arg name="map_file" default="$(find factory_sim)/maps/lowres_map.yaml"/>
+        <arg name="map_file" default="$(find thmho_heatmap_generator)/maps/lowres_map.yaml"/>
 
-        <node name="costmap_generator" pkg="factory_sim" type="costmap_generator" output="screen">
-                <rosparam file="$(find factory_sim)/config/costmap_params.yaml" command="load" ns="costmap/obstacles" />
+        <node name="costmap_generator" pkg="thmho_heatmap_generator" type="costmap_generator" output="screen">
+                <rosparam file="$(find thmho_heatmap_generator)/config/costmap_params.yaml" command="load" ns="costmap/obstacles" />
         </node>
 
         <!-- Map server -->
@@ -20,5 +20,5 @@
 
         <node pkg="tf" type="static_transform_publisher" name="sensor_link_broadcaster" args="0 0 0 0 0 0 world map 100" />
         <node pkg="rviz" type="rviz" name="rviz" required="true"
-                args="-d $(find factory_sim)/rviz/costmap.rviz"/>
+                args="-d $(find thmho_heatmap_generator)/rviz/costmap.rviz"/>
 </launch>
