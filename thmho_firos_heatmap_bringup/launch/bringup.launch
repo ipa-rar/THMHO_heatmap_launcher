@@ -4,7 +4,7 @@
   <arg name="heatmapsave_node" default="heatmap_saver" />
   <arg name="node_name" default="THMHO"/>
 
-  <include file="$(find factory_sim)/launch/office.launch" />
+  <include file="$(find factory_sim)/launch/heatmap_generator.launch" />
   <node name="$(arg heatmapsave_node)" pkg="heatmap_saver" type="heatmap_saver.py" output="screen">
   </node>
   
