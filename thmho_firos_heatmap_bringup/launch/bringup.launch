@@ -4,7 +4,7 @@
   <arg name="heatmapsave_node" default="heatmap_saver" />
   <arg name="node_name" default="THMHO"/>
 
-  <include file="$(find heatmap_gen)/launch/heatmap_generator.launch" />
+  <include file="$(find factory_sim)/launch/heatmap_generator.launch" />
   <node name="$(arg heatmapsave_node)" pkg="thmho_firos_heatmap_bringup" type="heatmap_saver.py" output="screen">
   </node>
   
