@@ -1,26 +1,29 @@
 #!/usr/bin/env python3
-from typing import Protocol
 import rospy
 from nav_msgs.msg import OccupancyGrid
-import matplotlib.pyplot as plt
-import numpy as np
+
+import requests
+from datetime import datetime
 
 
 class HeatmapSaver(object):
     def __init__(self):
+        self.url = 'http://localhost:5000/insert'
         self.msg = OccupancyGrid()
         self.heatmap_subscriber = rospy.Subscriber(
-            "/heatmap", OccupancyGrid, self.save_heatmap)
+            "/heatmap_generator/heatmap", OccupancyGrid, self.save_heatmap)
 
     def save_heatmap(self, msg):
-        map_id=msg.header.seq
-        width = msg.info.width
-        height = msg.info.height
-        heatmap = np.reshape(msg.data, (width, height))
-        plt.imshow(heatmap, cmap='coolwarm', interpolation='nearest')
-        plt.savefig("./heatmap/"+str(map_id)+".png")
+        body = {
+            'date': datetime.now().isoformat(),
+            'data': msg.data,
+            'width': msg.info.width,
+            'height': msg.info.height    
+        }
+        requests.post(self.url, json=body)
+
 
 if __name__ == '__main__':
-    rospy.init_node('HeatmapSaver', anonymous=True)
+    rospy.init_node('heatmap_saver', anonymous=True)
     heatmap = HeatmapSaver()
     rospy.spin()
