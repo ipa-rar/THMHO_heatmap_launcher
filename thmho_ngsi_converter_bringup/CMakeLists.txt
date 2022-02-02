@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(thmho_firos_heatmap_bringup)
+project(thmho_ngsi_converter_bringup)
 
 find_package(catkin REQUIRED COMPONENTS
   rospy
