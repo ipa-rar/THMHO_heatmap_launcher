@@ -1,2 +1,2 @@
-# THMHO_heatmap_launcher
+# thmho_ngsi_converter_bringup
 

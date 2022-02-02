@@ -1,9 +1,0 @@
-{
-    "environment": "server_node",
-    "server_node": {
-        "contextbroker": {
-            "address": "localhost",
-            "port": 1026
-        }
-    }
-}

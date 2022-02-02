@@ -1,0 +1,11 @@
+<launch>
+
+  <arg name="ngsi_translator_node" default="ngsiv2_translator_node" />
+
+  <node name="$(arg ngsi_translator_node)" 
+        pkg="thmho_firos_heatmap_bringup" 
+        type="heatmap_to_ngsi.py" 
+        output="screen">
+  </node>
+  
+</launch>
