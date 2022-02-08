@@ -1,0 +1,11 @@
+<launch>
+
+  <arg name="costmap_to_db" default="costmap_saver" />
+
+  <node name="$(arg costmap_to_db)" 
+        pkg="thmho_ngsi_converter_bringup" 
+        type="costmap_saver.py" 
+        output="screen">
+  </node>
+  
+</launch>
