@@ -10,7 +10,6 @@ import sys
 
 class HeatmapSaver(object):
     def __init__(self):
-        self.url = 'http://localhost:5000/insert'
         self.urlsparse = 'http://localhost:5000/insparse'
 
         self.heatmap_subscriber = rospy.Subscriber(
@@ -38,18 +37,13 @@ class HeatmapSaver(object):
         try:
             masked_data = csr_matrix(data * self.mask)
             date = datetime.now().isoformat()
-            body = {
-                'date': date,
-                'data': msg.data
-            }
             body_csr = {
                 'date': date,
                 'indices': masked_data.indices.tolist(),
                 'indptr': masked_data.indptr.tolist(),
             }
-            requests.post(self.url, json = body)
             requests.post(self.urlsparse, json = body_csr)
-            print(f"Inserted registry in both databases at {date}")
+            print(f"Inserted registry at {date}")
         except Exception as e:
             print(e)
 
