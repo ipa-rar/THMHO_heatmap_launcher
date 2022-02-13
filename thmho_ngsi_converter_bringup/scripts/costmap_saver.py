@@ -10,7 +10,7 @@ import sys
 
 class HeatmapSaver(object):
     def __init__(self):
-        self.urlsparse = 'http://localhost:5000/insparse'
+        self.urlsparse = 'http://localhost:5000/insert'
 
         self.heatmap_subscriber = rospy.Subscriber(
             "/costmap_generator/costmap/costmap", OccupancyGrid, self.save_heatmap)
