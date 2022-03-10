@@ -8,13 +8,14 @@ import time
 from datetime import datetime
 import sys
 
-class HeatmapSaver(object):
+
+class HeatmapSaver():
+    """API to save the Occupancy grid messages to mongoDB 
+    """
     def __init__(self):
         self.urlsparse = 'http://localhost:5000/insert'
-
         self.heatmap_subscriber = rospy.Subscriber(
             "/costmap_generator/costmap/costmap", OccupancyGrid, self.save_heatmap)
-
         costmap = rospy.wait_for_message("/map", OccupancyGrid, timeout=100)
         self.width = costmap.info.width
         self.height = costmap.info.height
@@ -29,10 +30,15 @@ class HeatmapSaver(object):
             'indices': self.mask.indices.tolist(),
             'indptr': self.mask.indptr.tolist(),
         }
-        requests.post(self.urlsparse, json = body)
+        requests.post(self.urlsparse, json=body)
         self.mask = self.mask.toarray()
 
     def save_heatmap(self, msg):
+        """Send OccupancyGrid message via Flask endpoint
+
+        Args:
+            msg (OccupancyGrid): OccupancyGrid
+        """
         data = np.array(msg.data).reshape(self.size)
         try:
             masked_data = csr_matrix(data * self.mask)
@@ -42,14 +48,14 @@ class HeatmapSaver(object):
                 'indices': masked_data.indices.tolist(),
                 'indptr': masked_data.indptr.tolist(),
             }
-            requests.post(self.urlsparse, json = body_csr)
+            requests.post(self.urlsparse, json=body_csr)
             print(f"Inserted registry at {date}")
         except Exception as e:
             print(e)
+
 
 if __name__ == '__main__':
     rospy.init_node('heatmap_saver', anonymous=True)
     heatmap = HeatmapSaver()
     time.sleep(5)
     rospy.spin()
-
