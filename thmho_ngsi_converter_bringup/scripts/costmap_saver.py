@@ -8,7 +8,10 @@ import time
 from datetime import datetime
 import sys
 
-class HeatmapSaver(object):
+class HeatmapSaver():
+    """
+    API to save the Occupancy grid messages to mongoDB
+    """
     def __init__(self):
         self.urlsparse = 'http://localhost:5000/insert'
 
@@ -49,7 +52,9 @@ class HeatmapSaver(object):
             print(e)
 
 if __name__ == '__main__':
+    time.sleep(5)
     rospy.init_node('heatmap_saver', anonymous=True)
     heatmap = HeatmapSaver()
     time.sleep(5)
     rospy.spin()
+
